@@ -35,7 +35,6 @@ def strassen(a,b):
     return c
 
 
-
 a = np.array([[1, 2, 3, 1],
              [4, 0, 1, 2],
              [2, 1, 0, 3],
@@ -45,15 +44,6 @@ b = np.array([[2, 1, 0, 3],
               [1, 3, 4, 2],
               [0, 2, 1, 5],
               [4, 1, 2, 0]])
-
-c = np.array([[1, 2],
-              [3, 4]])
-
-d = np.array([[2, 1],
-              [4, 1]])
-
-e = strassen(c,d)
-print(e)
 
 f = strassen(a,b)
 print(f)
