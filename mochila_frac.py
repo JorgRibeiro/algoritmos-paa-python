@@ -1,4 +1,4 @@
-def mochila_frac(itens):
+def mochila_frac(itens, capacidade_mochila):
     # Calcula valor por peso e guarda índice
     peso_valor = []
     for i, (peso, valor) in enumerate(itens):
@@ -8,7 +8,6 @@ def mochila_frac(itens):
     # Ordena por valor/peso decrescente
     peso_valor.sort(reverse=True)
 
-    capacidade_mochila = 30
     itens_mochila = []
     valor_total = 0
     
@@ -19,10 +18,9 @@ def mochila_frac(itens):
             itens_mochila.append((peso, valor))     
             capacidade_mochila -= peso
             valor_total += valor 
-        elif capacidade_mochila > 0:            # Se o item inteiro não cabe, mas ainda há espaço na mochila
+        elif capacidade_mochila > 0:   # Se o item inteiro não cabe, mas ainda há espaço
             fracao = capacidade_mochila / peso  # Fraciona o item  
-            itens_mochila.append((capacidade_mochila, valor * fracao))  # Coloca o Item fracionado na mochila
-            valor_total += valor * fracao
+            itens_mochila.append((capacidade_mochila, valor * fracao)) #Coloca o Item fracionado 
             capacidade_mochila = 0
             break
 
@@ -41,8 +39,7 @@ itens = [  # peso, valor
     (6, 6)
 ]
 
-itens_mochila,valor_total = mochila_frac(itens)
+itens_mochila,valor_total = mochila_frac(itens, 30)
 
 print("Itens na mochila (peso, valor):", itens_mochila)
-print("Valor total:", valor_total)   
-        
+print("Valor total:", valor_total)           
