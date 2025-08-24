@@ -1,12 +1,12 @@
 import heapq
 
 def dijkstra_classico(grafo, inicio):
-    # Dicionário para armazenar as distâncias mais curtas conhecidas.
-    # Todos começam com infinito, exceto o nó inicial, que é 0.
+    # Dicionário para armazenar as distâncias mais curtas conhecidas
+    # Todos começam com infinito, exceto o nó inicial, que é 0
     distancias = {no: float('infinity') for no in grafo}
     distancias[inicio] = 0
 
-    # Dicionário para reconstruir o caminho. Ex: predecessores['B'] = 'A'
+    # Dicionário para reconstruir o caminho
     predecessores = dict.fromkeys(grafo, None)
 
     # A fila armazena tuplas de (distância, nó). O heapq sempre manterá
@@ -15,31 +15,21 @@ def dijkstra_classico(grafo, inicio):
 
     # O loop continua enquanto houver nós "abertos" para explorar na fila.
     while fila_prioridade:
-        # 3.1. Extrai o nó com a menor distância
         # Pega o nó da fila que atualmente tem a menor distância da origem.
         distancia_atual, no_atual = heapq.heappop(fila_prioridade)
 
-        # Otimização: Se a distância extraída é maior que a já registrada,
-        # significa que já encontramos um caminho mais curto para este nó
-        # e esta entrada na fila é obsoleta. Podemos ignorá-la.
-        if distancia_atual > distancias[no_atual]:
-            continue
-
-        # 3.2. Relaxamento das Arestas
-        # Para cada vizinho do nó atual, verificamos se podemos melhorar (encurtar)
-        # o caminho até ele.
+        # Para cada vizinho do nó atual, verificamos se podemos melhorar (encurtar) o caminho até ele.
         for vizinho, peso in grafo[no_atual]:
             nova_distancia = distancia_atual + peso
 
-            # Se encontrarmos um caminho mais curto para o vizinho...
+            # Se encontrarmos um caminho mais curto para o vizinho
             if nova_distancia < distancias[vizinho]:
-                # ...atualizamos sua distância e seu predecessor...
+                # atualizamos sua distância e seu predecessor
                 distancias[vizinho] = nova_distancia
                 predecessores[vizinho] = no_atual
-                # ...e o adicionamos à fila para ser explorado futuramente.
+                # e o adicionamos à fila para ser explorado futuramente.
                 heapq.heappush(fila_prioridade, (nova_distancia, vizinho))
 
-    # 4. Retorno
     # Retorna as distâncias finais e os predecessores para reconstrução dos caminhos.
     return distancias, predecessores
 
